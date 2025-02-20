@@ -24,7 +24,7 @@ dist-ssr
 *.sw?
 
 # Ignore environment variables file
-../backend/.env
+backend/.env
 
 # Other files and directories to ignore
-../backend/__pycache__/
+backend/__pycache__/

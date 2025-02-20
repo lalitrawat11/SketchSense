@@ -1,0 +1,163 @@
+/* Reset default margins and padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background-color: #1a1a1a;
+  padding: 20px;
+}
+
+.toolbar {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 10px;
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+.canvas-container {
+  position: relative;
+}
+
+.canvas-container canvas {
+  cursor: crosshair;
+}
+
+canvas {
+  flex: 1;
+  width: calc(100% - 40px);  /* Account for container padding */
+  height: calc(100% - 100px);  /* Account for toolbar height and padding */
+  border: 2px solid #333;
+  background-color: black;
+  border-radius: 8px;
+}
+
+/* Add this to your existing CSS file */
+
+button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.reset-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.calculate-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.line-width-slider {
+  width: 100px;
+}
+
+span {
+  color: white;
+}
+
+.color-palette {
+  display: flex;
+  gap: 8px;
+  padding: 5px;
+  background-color: #2a2a2a;
+  border-radius: 4px;
+}
+
+.color-option {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #444;
+  transition: transform 0.2s;
+}
+
+.color-option:hover {
+  transform: scale(1.1);
+}
+
+.color-option.selected {
+  border: 2px solid #fff;
+  transform: scale(1.1);
+}
+
+.undo-btn {
+  background-color: #6c757d;
+  color: white;
+}
+
+.undo-btn:disabled {
+  background-color: #495057;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.canvas-container {
+  flex: 1;
+  display: flex;
+  gap: 20px;
+}
+
+.result-container {
+  background: #2a2a2a;
+  padding: 20px;
+  border-radius: 8px;
+  min-width: 300px;
+  max-width: 400px;
+}
+
+.latex-result {
+  color: white;
+  font-size: 1.2em;
+  margin-bottom: 15px;
+}
+
+.graph-result {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.error-container {
+  background: #dc3545;
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.recognition-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.recognition-list li {
+  padding: 8px;
+  margin: 4px 0;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.recognize-btn {
+  background-color: #4CAF50;
+  color: white;
+} 

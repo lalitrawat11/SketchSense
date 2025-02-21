@@ -1,6 +1,6 @@
 # SketchSense
 
-SketchSense – Your sketches make sense with AI. This is a FastAPI application that provides an API for recognizing and processing images, specifically for drawing mathematical concepts and equations. It utilizes machine learning models to generate captions and solve equations based on the content of the images.
+SketchSense – Your sketches make sense with AI. This is a FastAPI application that provides an API for processing images and recognization or calculation, specifically for drawing mathematical concepts and equations. It utilizes machine learning models to generate captions and solve equations based on the content of the images.
 
 ## Features
 

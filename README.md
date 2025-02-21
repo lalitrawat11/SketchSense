@@ -63,7 +63,7 @@ SketchSense – Your sketches make sense with AI. This is a FastAPI application 
 
 - **Endpoint**: `/recognize/`
 - **Method**: `POST`
-- **Description**: Upload an image to generate a caption.
+- **Description**: Draw an image ( eg. Apple ) to generate a caption.
 - **Request**: 
   - Form-data with a file field named `file`.
 - **Response**: 
@@ -73,7 +73,7 @@ SketchSense – Your sketches make sense with AI. This is a FastAPI application 
 
 - **Endpoint**: `/calculate/`
 - **Method**: `POST`
-- **Description**: Upload an image to extract text and solve equations.
+- **Description**: Draw an equation ( eg. y = mx + c ) to extract text and solve equations.
 - **Request**: 
   - Form-data with a file field named `file`.
 - **Response**: 

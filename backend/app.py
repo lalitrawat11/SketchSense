@@ -9,6 +9,7 @@ from together import Together
 from pydantic import BaseModel
 from dotenv import load_dotenv
 import os
+import uvicorn
 
 load_dotenv()
 
@@ -43,26 +44,18 @@ async def recognize(file: UploadFile = File(...)):
         # Process image
         inputs = processor(image, return_tensors="pt")  # Prepare the image for the model
         out = model.generate(**inputs)  # Generate the caption
-        caption = processor.decode(out[0], skip_special_tokens=True)  # Decode the caption
+        extracted_text = processor.decode(out[0], skip_special_tokens=True)  # Decode the caption
         
         prompt = (
             "You are an AI that read the caption. "
             "f the image represents a well-known story (e.g., a tree with an apple falling on a man referencing Newton’s discovery of gravity.), respond with the relevant story in under 30 words.  "
             "if it is an object like mango just answer with the caption itself. "
             "Otherwise, provide a concise, factual description in under 30 words."
-            "Now, analyze this: {caption}"
+            "Now, analyze this: {extracted_text}"
         )
 
-        print(caption)
-        response = client.chat.completions.create(
-            model=aiModel,  # Text-based model
-            messages=[
-                {"role": "system", "content": "You are an AI that explains text in images."},
-                {"role": "user", "content":  prompt.format(caption=caption)}
-            ]
-        )
-        result = response.choices[0].message.content
-        
+        print(extracted_text)
+        result = callingTogetherAI(prompt,extracted_text)
         print(f"Generated caption: {result}")  # Log the caption
         return JSONResponse(content={"caption": result})  # Return the caption as JSON
     except Exception as e:
@@ -95,24 +88,28 @@ async def calculate(file: UploadFile = File(...)):
         )
 
         print(extracted_text)
-        response = client.chat.completions.create(
-            model=aiModel,  # Text-based model
-            messages=[
-                {"role": "system", "content": "You are an AI that explains text in images."},
-                {"role": "user", "content":  prompt.format(extracted_text=extracted_text)}
-            ]
-        )
-        caption = response.choices[0].message.content
+        
+        caption = callingTogetherAI(prompt,extracted_text)
         print(caption)
         return JSONResponse(content={"caption": caption})  # Return the caption as JSON
         
     except Exception as e:
         print(f"Error: {str(e)}")  # Log any errors
         return JSONResponse(content={"error": str(e)}, status_code=500)
-        
+
 @app.get("/")
 def read_root():
     return {"message": "Hello from SketchSense Backend!"}
+
+def callingTogetherAI(prompt,extracted_text):
+    response = client.chat.completions.create(
+            model=aiModel,  # Text-based model
+            messages=[
+                {"role": "system", "content": "You are an AI that explains text in images."},
+                {"role": "user", "content":  prompt.format(extracted_text=extracted_text)}
+            ]
+        )
+    return response.choices[0].message.content
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 8000))  # Get PORT from Render

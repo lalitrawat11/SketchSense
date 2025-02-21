@@ -18,6 +18,9 @@ SketchSense – Your sketches make sense with AI. This is a FastAPI application 
 - EasyOCR
 - Together (API client)
 - Pydantic
+- Dotenv
+- Uvicorn
+- Gunicorn
 - Aiofiles
 
 ## Installation

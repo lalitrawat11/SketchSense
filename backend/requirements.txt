@@ -7,4 +7,4 @@ pydantic
 uvicorn
 gunicorn
 python-dotenv
-
+python-multipart

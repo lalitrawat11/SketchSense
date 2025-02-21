@@ -109,4 +109,11 @@ async def calculate(file: UploadFile = File(...)):
     except Exception as e:
         print(f"Error: {str(e)}")  # Log any errors
         return JSONResponse(content={"error": str(e)}, status_code=500)
+        
+@app.get("/")
+def read_root():
+    return {"message": "Hello from SketchSense Backend!"}
 
+if __name__ == "__main__":
+    port = int(os.getenv("PORT", 8000))  # Get PORT from Render
+    uvicorn.run(app, host="0.0.0.0", port=port)

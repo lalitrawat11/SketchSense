@@ -179,7 +179,7 @@ function App() {
       formData.append("file", blob, "drawing.png"); // Append the blob as a file
 
       const apiResponse = await axios.post(
-        "${import.meta.env.VITE_API_URL}/recognize/",
+        `${import.meta.env.VITE_API_URL}/recognize/`,
         formData,
         {
           headers: {

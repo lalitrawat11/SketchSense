@@ -64,7 +64,6 @@ function App() {
       (e.clientY - rect.top) * scaleY
     );
     setIsDrawing(true);
-    drawCaption("");
   };
 
   const draw = (e) => {
@@ -100,7 +99,6 @@ function App() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     setUndoStack([]);
     setResultText("");
-    setHasDrawn(false);
   };
 
   const undo = () => {
@@ -153,11 +151,15 @@ function App() {
       const formData = new FormData();
       formData.append("file", blob, "drawing.png"); // Append the blob as a file
 
-      const apiResponse = await axios.post("http://localhost:8000/calculate/", formData, {
+      const apiResponse = await axios.post(
+        "http://localhost:8000/calculate/",
+        formData,
+        {
           headers: {
-              'Content-Type': 'multipart/form-data', // Set the correct content type
+            "Content-Type": "multipart/form-data", // Set the correct content type
           },
-      });
+        }
+      );
       setResultText(apiResponse.data.caption); //print ans in result box
     } catch (error) {
       console.error("Error:", error);
@@ -166,28 +168,31 @@ function App() {
 
   const recognizeDrawing = async () => {
     try {
-        const canvas = canvasRef.current;
-        const imageData = canvas.toDataURL("image/png"); // Get base64 image data
+      const canvas = canvasRef.current;
+      const imageData = canvas.toDataURL("image/png"); // Get base64 image data
 
-        // Convert base64 to Blob
-        const response = await fetch(imageData);
-        const blob = await response.blob(); // Convert the base64 data to a Blob
+      // Convert base64 to Blob
+      const response = await fetch(imageData);
+      const blob = await response.blob(); // Convert the base64 data to a Blob
 
-        const formData = new FormData();
-        formData.append("file", blob, "drawing.png"); // Append the blob as a file
+      const formData = new FormData();
+      formData.append("file", blob, "drawing.png"); // Append the blob as a file
 
-        const apiResponse = await axios.post("http://localhost:8000/recognize/", formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data', // Set the correct content type
-            },
-        });
-        setResultText(apiResponse.data.caption); //print ans in result box
+      const apiResponse = await axios.post(
+        "http://localhost:8000/recognize/",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data", // Set the correct content type
+          },
+        }
+      );
+      setResultText(apiResponse.data.caption); //print ans in result box
     } catch (error) {
-        console.error("Error:", error); // Log any errors
+      console.error("Error:", error); // Log any errors
     }
-}; 
+  };
 
-  
   return (
     <div className="app-container">
       <div className="toolbar">
@@ -249,14 +254,17 @@ function App() {
           onMouseOut={stopDrawing}
         />
       </div>
-      <div style={{ 
-          marginTop: "5px", 
-          padding: "10px", 
+      <div
+        style={{
+          marginTop: "5px",
+          padding: "10px",
           border: "1px solid black",
           background: "#FFFFFF",
           color: "#000000",
-      }}>
-        <strong>Result: </strong>{resultText}
+        }}
+      >
+        <strong>Result: </strong>
+        {resultText}
       </div>
     </div>
   );

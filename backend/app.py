@@ -111,6 +111,3 @@ def callingTogetherAI(prompt,extracted_text):
         )
     return response.choices[0].message.content
 
-if __name__ == "__main__":
-    port = int(os.getenv("PORT", 10000))  # Get PORT from Render
-    uvicorn.run(app, host="0.0.0.0", port=port)

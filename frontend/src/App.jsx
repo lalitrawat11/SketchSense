@@ -152,7 +152,7 @@ function App() {
       formData.append("file", blob, "drawing.png"); // Append the blob as a file
 
       const apiResponse = await axios.post(
-        "https://huggingface.co/spaces/max1998/SketchSense/calculate/",
+        `${import.meta.env.VITE_API_URL}/calculate/`,
         formData,
         {
           headers: {

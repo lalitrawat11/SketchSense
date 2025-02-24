@@ -152,7 +152,7 @@ function App() {
       formData.append("file", blob, "drawing.png"); // Append the blob as a file
 
       const apiResponse = await axios.post(
-        "http://localhost:8000/calculate/",
+        "${import.meta.env.VITE_API_URL}/calculate/",
         formData,
         {
           headers: {
@@ -179,7 +179,7 @@ function App() {
       formData.append("file", blob, "drawing.png"); // Append the blob as a file
 
       const apiResponse = await axios.post(
-        "http://localhost:8000/recognize/",
+        "${import.meta.env.VITE_API_URL}/recognize/",
         formData,
         {
           headers: {

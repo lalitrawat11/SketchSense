@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import "./App.css";
 import axios from "axios";
-import { MathJax, MathJaxContext } from "better-react-mathjax";
 
 function App() {
   const canvasRef = useRef(null);
@@ -32,21 +31,24 @@ function App() {
 
   useEffect(() => {
     const resizeCanvas = () => {
-      const canvas = canvasRef.current;
-      if (canvas) {
-        const displayWidth = canvas.clientWidth;
-        const displayHeight = canvas.clientHeight;
-        canvas.width = displayWidth;
-        canvas.height = displayHeight;
+      requestAnimationFrame(() => {
+        const canvas = canvasRef.current;
+        if (canvas) {
+          const displayWidth = canvas.clientWidth;
+          const displayHeight = canvas.clientHeight;
+          canvas.width = displayWidth;
+          canvas.height = displayHeight;
 
-        const ctx = canvas.getContext("2d");
-        ctx.fillStyle = "#FFFFFF";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-      }
+          const ctx = canvas.getContext("2d");
+          ctx.fillStyle = "#ffffff";
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+      });
     };
 
-    resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
+    resizeCanvas(); // Run after event listener to avoid missing early resizes
+
     return () => window.removeEventListener("resize", resizeCanvas);
   }, []);
 
@@ -74,7 +76,7 @@ function App() {
     const scaleY = canvas.height / rect.height;
 
     const ctx = canvas.getContext("2d");
-    ctx.strokeStyle = isErasing ? "#000000" : currentColor;
+    ctx.strokeStyle = isErasing ? "#ffffff" : currentColor;
     ctx.lineWidth = lineWidth;
     ctx.lineCap = "round";
 
@@ -201,7 +203,7 @@ function App() {
         </button>
         <button
           onClick={() => setIsErasing(!isErasing)}
-          className={`eraser-btn ${isErasing ? "active" : "#FFFFFF"}`}
+          className={`eraser-btn ${isErasing ? "active" : "#ffffff"}`}
         >
           {isErasing ? "Draw" : "Erase"}
         </button>
@@ -253,18 +255,29 @@ function App() {
           onMouseUp={stopDrawing}
           onMouseOut={stopDrawing}
         />
-      </div>
-      <div
-        style={{
-          marginTop: "5px",
-          padding: "10px",
-          border: "1px solid black",
-          background: "#FFFFFF",
-          color: "#000000",
-        }}
-      >
-        <strong>Result: </strong>
-        {resultText}
+
+        <div
+          style={{
+            padding: "10px",
+            border: "1px solid black",
+            background: "#FFFFFF",
+            color: "#000000",
+            position: "absolute",
+            bottom: "5px",
+            left: "50%",
+            transform: "translateX(-50%)" /* Center horizontally */,
+            width: "calc(100% )",
+            height: "80px",
+            borderRadius: "8px",
+          }}
+        >
+          <strong style={{ fontSize: "35px", fontWeight: "bold" }}>
+            Result:
+          </strong>
+          <span style={{ fontSize: "35px", color: "#000000" }}>
+            {" " + resultText + "."}
+          </span>
+        </div>
       </div>
     </div>
   );

@@ -1,7 +1,6 @@
 ﻿fastapi
 pillow
 transformers
-easyocr
 together
 pydantic
 uvicorn

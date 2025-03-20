@@ -1,0 +1,9 @@
+﻿fastapi
+pillow
+easyocr
+together
+pydantic
+uvicorn
+gunicorn
+python-dotenv
+python-multipart

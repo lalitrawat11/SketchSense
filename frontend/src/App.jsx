@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import "./App.css";
 import axios from "axios";
+import infoIcon from "./info.png";
 
 function App() {
   const canvasRef = useRef(null);
@@ -10,7 +11,12 @@ function App() {
   const [currentColor, setCurrentColor] = useState("#000000");
   const [undoStack, setUndoStack] = useState([]);
   const [resultText, setResultText] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
 
+  const togglePopup = () => {
+    setShowPopup(!showPopup);
+  };
+  
   const colors = [
     "#000000",
     "#FFFFFF",
@@ -244,6 +250,29 @@ function App() {
         <button className="recognize-btn" onClick={recognizeDrawing}>
           Recognize
         </button>
+        <div className="container">
+          <button className="info-button" onClick={togglePopup}>
+            <img src={infoIcon} />
+          </button>
+          {showPopup && (
+            <div className="popup">
+              <p>
+                SketchSense – Your sketches make sense with AI. This is a
+                FastAPI application that provides an API for processing images
+                and recognization or calculation, specifically for drawing
+                mathematical concepts and equations. It utilizes machine
+                learning models to generate captions and solve equations based
+                on the content of the images.
+                Notes: 
+                Calculate - Draw a mathematical equation (eg. y = mx + c) to get the result.
+                Recognize - Draw a sketch (eg. apple) to get the result.
+              </p>
+              <button className="close-button" onClick={togglePopup}>
+                Close
+              </button>
+            </div>
+          )}
+        </div>
       </div>
       <div className="canvas-container">
         <canvas

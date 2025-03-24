@@ -300,7 +300,7 @@ function App() {
             borderRadius: "8px",
           }}
         >
-          <strong style={{ fontSize: "35px", fontWeight: "bold" }}>
+          <strong style={{ fontSize: "24px", fontWeight: "bold" }}>
             Result:
           </strong>
           <span style={{ fontSize: "35px", color: "#000000" }}>

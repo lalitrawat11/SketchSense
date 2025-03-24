@@ -303,7 +303,7 @@ function App() {
           <strong style={{ fontSize: "24px", fontWeight: "bold" }}>
             Result:
           </strong>
-          <span style={{ fontSize: "35px", color: "#000000" }}>
+          <span style={{ fontSize: "24px", color: "#000000" }}>
             {" " + resultText + "."}
           </span>
         </div>
